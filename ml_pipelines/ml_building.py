@@ -34,6 +34,7 @@ def ml_building():
     y = load_pickle(os.path.join(resting_path, 'measures', 'y'))
 
     # SVC model
+    print('Building SVC model\n')
     svc_parameters = {'C': [1e0, 1e1, 1e2]}
     svc = LinearSVC(dual=True)
     svc = GridSearchCV(svc, svc_parameters)
@@ -42,6 +43,7 @@ def ml_building():
     save_pickle(os.path.join(resting_path, 'measures', 'svc_model'), svc_model)
     
     # Logistic model
+    print('Building Logistic model\n')
     log_parameters = {'C': [1e0, 1e1, 1e2]}
     logistic = LogisticRegression() 
     logistic = GridSearchCV(logistic, log_parameters)
@@ -50,6 +52,7 @@ def ml_building():
     save_pickle(os.path.join(resting_path, 'measures', 'logistic_model'), logistic_model)
 
     # Tree model 
+    print('Building Decesion tree model\n')
     tree_parameters ={'criterion':["gini", "entropy", "log_loss"]}
     tree_clf = tree.DecisionTreeClassifier()
     tree_clf = GridSearchCV(tree_clf, tree_parameters)
@@ -58,6 +61,7 @@ def ml_building():
     save_pickle(os.path.join(resting_path, 'measures', 'tree_model'), tree_model)
 
     # Random forest model
+    print('Building Random Forest model\n')
     ranforest = RandomForestClassifier()
     ranforest = GridSearchCV(ranforest, tree_parameters)
     random_forest_model = estimate_model(ranforest, X, y)
@@ -65,6 +69,7 @@ def ml_building():
     save_pickle(os.path.join(resting_path, 'measures', 'random_forest_model'), random_forest_model)
 
     # Stacked model
+    print('Building Stacked model\n')
     estimators = [('rf', RandomForestClassifier()), ('log', LogisticRegression())]
     stacked_estimator = StackingClassifier(estimators, final_estimator=LogisticRegression())
     stacked_estimator_model = estimate_model(stacked_estimator, X, y)
