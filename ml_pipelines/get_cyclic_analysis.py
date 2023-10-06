@@ -1,4 +1,4 @@
-from fNeuro.ml.mvpa_functions import load_pickle, save_pickle
+from fNeuro.utils.pickling import load_pickle, save_pickle
 from fNeuro.connectivity.connectivity import Cyclic_analysis
 from decouple import config
 import os
@@ -21,6 +21,7 @@ def pre_process() -> None:
     -------
     None
     '''
+    
     resting_path = config('resting')
     time_series = load_pickle(os.path.join(resting_path, 'measures', 'time_series'))
     an_time_series = time_series['an']
