@@ -43,7 +43,7 @@ def comparisons():
         oversampler= smote_variants.Assembled_SMOTE()
         cor_X, cor_y = oversampler.sample(connectivity, label)
         scores[kind].append(estimate_model(svc, cor_X, cor_y))
-    scores['cyclic'] = load_pickle(os.path.join(resting_path, 'measures', 'svc_model'))
+    scores['cyclic'] = load_pickle(os.path.join(resting_path, 'measures', 'svc_model'))['Accura']
     save_pickle(os.path.join(resting_path, 'measures', 'svc_comparison'), scores)
 
 if __name__ == "__main__":
