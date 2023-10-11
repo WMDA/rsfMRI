@@ -57,16 +57,20 @@ def process_image(img: str):
     ------
     None
     '''
+
     name = get_subject_name(img)
     print('Working on: ', name)
     to_save_path = os.path.join(config('resting'), 'cleaned')
     confounds = get_counfounds(img)
-    fmri_cleaned_image =  image.clean_img(img,
+    fmri_cleaned_image =  image.clean_img(
+                           img,
                            low_pass=0.08,
                            high_pass=0.01,
                            t_r=2,
                            ensure_finite=True,
-                           confounds=confounds)
+                           standardize="zscore_sample",
+                           confounds=confounds
+                           )
     fmri_cleaned_image.to_filename(os.path.join(to_save_path, name))
 
 if __name__ == "__main__":
