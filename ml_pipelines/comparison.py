@@ -30,8 +30,8 @@ def comparisons():
     
     resting_path = config('resting')
     time_series = load_pickle(os.path.join(resting_path, 'measures', 'time_series'))
-    an_time_series = time_series['an']
-    hc_time_series = time_series['hc']
+    an_time_series = list(time_series['an'].values())
+    hc_time_series = list(time_series['hc'].values())
     group = np.asarray(an_time_series + hc_time_series)
     label = np.asarray([0 for sub in range(len(an_time_series))] + [1 for sub in range(len(hc_time_series))])
     kinds = ["correlation", "partial correlation", "tangent"]
@@ -43,7 +43,7 @@ def comparisons():
         oversampler= smote_variants.Assembled_SMOTE()
         cor_X, cor_y = oversampler.sample(connectivity, label)
         scores[kind].append(estimate_model(svc, cor_X, cor_y))
-    scores['cyclic'] = load_pickle(os.path.join(resting_path, 'measures', 'svc_model'))['Accura']
+    scores['cyclic'] = load_pickle(os.path.join(resting_path, 'measures', 'svc_model'))
     save_pickle(os.path.join(resting_path, 'measures', 'svc_comparison'), scores)
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ from decouple import config
 import os
 import numpy as np
 import smote_variants
+import re
 
 
 def pre_process() -> None:
@@ -26,9 +27,10 @@ def pre_process() -> None:
     time_series = load_pickle(os.path.join(resting_path, 'measures', 'time_series'))
     an_time_series = list(time_series['an'].values())
     hc_time_series = list(time_series['hc'].values())
-    part_hc = list(time_series['HC'].keys())
-    part_an = list(time_series['AN'].keys())
+    part_hc = list(time_series['hc'].keys())
+    part_an = list(time_series['an'].keys())
     part = part_hc + part_an
+    part = [re.findall('sub-B....', participant)[0] for participant in part]
     group = np.asarray(an_time_series + hc_time_series)
     label = np.asarray([0 for sub in range(len(an_time_series))] + [1 for sub in range(len(hc_time_series))])
     connectome = Cyclic_analysis().fit(group)
