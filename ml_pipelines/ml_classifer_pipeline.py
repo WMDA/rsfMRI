@@ -1,5 +1,5 @@
 from get_cyclic_analysis import pre_process
-from ml_building import ml_building
+from ml_building import ml_classifer
 from comparison import comparisons
 
 if __name__ == "__main__":

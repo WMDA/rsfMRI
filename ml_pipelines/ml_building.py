@@ -13,7 +13,7 @@ from fNeuro.utils.pickling import load_pickle, save_pickle
 from fNeuro.ml.ml_functions import estimate_model
 
 
-def ml_building():
+def ml_classifer():
     
     '''
     Function to build, svc, decision tree,
