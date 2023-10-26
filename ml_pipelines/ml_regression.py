@@ -172,7 +172,7 @@ def regression_models_no_cross_val(X: np.array,
     svr_score_ados = svr_ados.score(X_test, y_test)
     svr_mae_ados = mean_absolute_error(y_test, svr_ados.predict(X_test))
     svr_model = {
-        'model': svr_ados,
+        'model': svr_ados.fit(X, y),
         'r2': svr_score_ados,
         'MAE': svr_mae_ados
     }
