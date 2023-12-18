@@ -382,11 +382,9 @@ def cylic_connectivity(time_series):
         Lead Lag matrix.
 
     """
-
-    import pandas as pd
-    X = pd.DataFrame(time_series, dtype='float64')
-    diff = X.diff()
-    A = X[:-1].T @ diff.values[1:]
+    # Do first order differencing in numpy 
+    diff = np.insert(np.diff(time_series, axis=0), 0, 0, axis=0)
+    A = time_series[:-1].T @ diff[1:]
     return np.array(0.5 * (A - A.T))
 
 @fill_doc
