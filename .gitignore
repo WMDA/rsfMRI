@@ -1,5 +1,6 @@
 # user defined
 ignore*
+.repeat_fmri
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
